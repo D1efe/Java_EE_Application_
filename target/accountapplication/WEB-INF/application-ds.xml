@@ -14,3 +14,5 @@
       </security>
    </datasource>
 </datasources>
+
+<!-- contains stuff for making databases. line 10 is the db type, 12 and 13 are user and password -->

@@ -1,15 +1,15 @@
 package com.qa.javaaccountapp.accountapplication;
 
 import javax.persistence.EntityManager;
+import java.util.List;
+
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
-import antlr.collections.List;
-
 @Transactional(TxType.SUPPORTS)
-public class transactionDBImpl {
+public class transactionDBImpl implements ITransaction {
 	
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;

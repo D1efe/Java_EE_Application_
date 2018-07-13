@@ -14,7 +14,7 @@ public class transactionDBImpl implements ITransaction {
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
 	
-	@Transactional(TxType.REQUIRED)
+	@Transactional(TxType.SUPPORTS)
 	public List<Account> getAllAccounts() {
 		
 		TypedQuery<Account> query = em.createQuery("SELECT m FROM ACCOUNT m ORDER BY m.accountNumber DESC", Account.class);
@@ -22,7 +22,7 @@ public class transactionDBImpl implements ITransaction {
 	
 	}
 	
-	@Transactional(TxType.REQUIRED)
+	@Transactional(TxType.SUPPORTS)
 	public Account findAnAccount(String accountNumber) {
 		return em.find(Account.class, accountNumber);
 	}

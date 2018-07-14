@@ -1,4 +1,4 @@
-package com.qa.javaaccountapp.accountapplication;
+package database;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

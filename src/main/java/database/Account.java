@@ -11,7 +11,7 @@ public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String accountNumber;
+	private long id;
 
 	@Column(length = 100)
 	private String firstName;
@@ -19,10 +19,22 @@ public class Account {
 	@Column(length = 100)
 	private String lastName;
 
-	public Account(String firstName, String lastName, String accountNumber) {
+	@Column(length = 6)
+	private String accountNumber;
+
+	public Account(long id, String firstName, String lastName, String accountNumber) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.accountNumber = accountNumber;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public void setFirstName(String firstName) {
@@ -32,7 +44,7 @@ public class Account {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
@@ -40,7 +52,7 @@ public class Account {
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}

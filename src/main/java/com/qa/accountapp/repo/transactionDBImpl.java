@@ -2,6 +2,7 @@ package com.qa.accountapp.repo;
 
 import java.util.List;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional.TxType;
 import database.Account;
 import utility.JSONutil;
 
+@Default
 @Transactional(TxType.SUPPORTS)
 public class transactionDBImpl implements ITransaction {
 
@@ -23,14 +25,14 @@ public class transactionDBImpl implements ITransaction {
 
 	public List<Account> getAllAccounts() {
 
-		TypedQuery<Account> query = em.createQuery("SELECT m FROM ACCOUNT m ORDER BY m.accountNumber DESC",
+		TypedQuery<Account> query = em.createQuery("SELECT m FROM ACCOUNT m ORDER BY m.id DESC",
 				Account.class);
 		return query.getResultList();
 
 	}
 
-	public Account findAnAccount(String accNo) {
-		return em.find(Account.class, accNo);
+	public Account findAnAccount(Long id) {
+		return em.find(Account.class, id);
 	}
 
 	@Transactional(TxType.REQUIRED)
@@ -40,9 +42,9 @@ public class transactionDBImpl implements ITransaction {
 	}
 
 	@Transactional(TxType.REQUIRED)
-	public String updateAnAccount(String accNo, String updatedInfo) {
+	public String updateAnAccount(Long id, String updatedInfo) {
 		Account tempUpdateInfo = util.getObjectForJSON(updatedInfo, Account.class);
-		Account accountToUpdate = findAnAccount(accNo);
+		Account accountToUpdate = findAnAccount(id);
 		if (accountToUpdate != null) {
 			accountToUpdate = tempUpdateInfo;
 			em.merge(accountToUpdate);
@@ -52,8 +54,8 @@ public class transactionDBImpl implements ITransaction {
 	}
 
 	@Transactional(TxType.REQUIRED)
-	public void deleteAccount(String accNo) {
-		em.remove(em.getReference(Account.class, accNo));
+	public void deleteAccount(Long id) {
+		em.remove(em.getReference(Account.class, id));
 
 
 	}

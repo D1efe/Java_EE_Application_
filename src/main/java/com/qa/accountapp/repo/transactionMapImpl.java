@@ -4,37 +4,40 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import database.Account;
 import utility.JSONutil;
 
+
+@Alternative
 public class transactionMapImpl implements ITransaction {
 
-	private long ACCNO = 1;
-	private HashMap<String, Account> accounts;
+	private long id = 1;
+	private HashMap<Long, Account> accounts;
 
 	@Inject
 	private JSONutil util;
 
-	transactionMapImpl() {
+	public transactionMapImpl() {
 		accounts = new HashMap<>();
 	}
-
+	
 	@Override
 	public Account createAnAccount(Account account) {
-		ACCNO = Collections.max(accounts.entrySet());
-		String accNo = ACCNO++;
-		accounts.put(AccNo, account);
-		return null;
+		id = Collections.max(accounts.keySet());
+		id++;
+		accounts.put(id, account);
+		return account;
 	}
 
 	@Override
-	public String updateAnAccount(String accNo, String updateInfo) {
+	public String updateAnAccount(Long id, String updateInfo) {
 		String message = "";
-		if (accounts.containsKey(accNo)) {
+		if (accounts.containsKey(id)) {
 			Account updatedAccount = util.getObjectForJSON(updateInfo, Account.class);
-			accounts.put(accNo, updatedAccount);
+			accounts.put(id, updatedAccount);
 			message = updateInfo;
 		} else
 			message = "account not found";
@@ -42,16 +45,16 @@ public class transactionMapImpl implements ITransaction {
 	}
 
 	@Override
-	public void deleteAccount(String accNo) {
-		accounts.remove(accNo);
+	public void deleteAccount(Long id) {
+		accounts.remove(id);
 
 	}
 
 	@Override
-	public Account findAnAccount(String accNo) {
+	public Account findAnAccount(Long id) {
 		Account foundAcc = null;
-		if (accounts.containsKey(accNo)) {
-			foundAcc = accounts.get(accNo);
+		if (accounts.containsKey(id)) {
+			foundAcc = accounts.get(id);
 		} else
 			System.out.println("Account not found");
 		return foundAcc;

@@ -8,11 +8,11 @@ public interface ITransaction {
 
 	public Account createAnAccount(Account account);
 
-	public String updateAnAccount(String accNo, String updateInfo);
+	public String updateAnAccount(Long id, String updateInfo);
 
-	public void deleteAccount(String accNo);
+	public void deleteAccount(Long id);
 
-	public Account findAnAccount(String accountNumber);
+	public Account findAnAccount(Long id);
 
 	public List<Account> getAllAccounts();
 

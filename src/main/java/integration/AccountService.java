@@ -42,7 +42,7 @@ public class AccountService {
 		service.deleteAccount(id);
 	}
 
-	@Path("/json")
+	@Path("/json/{id}")
 	@GET
 	@Produces({ "application/json" })
 	public Account findAnAccount(@PathParam("id") Long id) {
@@ -52,7 +52,7 @@ public class AccountService {
 	@Path("/json")
 	@GET
 	@Produces({ "application/json" })
-	public List<Account> getAllAccounts(@PathParam("id") Long id) {
+	public List<Account> getAllAccounts(Long id) {
 		return service.getAllAccounts();
 
 	}

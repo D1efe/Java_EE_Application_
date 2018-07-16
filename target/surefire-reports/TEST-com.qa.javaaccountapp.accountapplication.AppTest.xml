@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.qa.javaaccountapp.accountapplication.AppTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.qa.javaaccountapp.accountapplication.AppTest" time="0.006" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -25,7 +25,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/dan/Programming/EclipseProjects/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf5174645961375880111.tmp"/>
+    <property name="classworlds.conf" value="/home/dan/Programming/EclipseProjects/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf505424653784371460.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="jdk.debug" value="release"/>
@@ -61,5 +61,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.qa.javaaccountapp.accountapplication.AppTest" name="testApp" time="0.005"/>
+  <testcase classname="com.qa.javaaccountapp.accountapplication.AppTest" name="testApp" time="0.006"/>
 </testsuite>

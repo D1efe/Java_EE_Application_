@@ -1,12 +1,12 @@
 package com.qa.accountapp.repo;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -19,26 +19,14 @@ public class transactionDBImpl implements ITransaction {
 
 	@Inject
 	private JSONutil util;
-	
+
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
 
-	public List<Account> getAllAccounts() {
-
-		TypedQuery<Account> query = em.createQuery("SELECT m FROM ACCOUNT m ORDER BY m.id DESC",
-				Account.class);
-		return query.getResultList();
-
-	}
-
-	public Account findAnAccount(Long id) {
-		return em.find(Account.class, id);
-	}
-
 	@Transactional(TxType.REQUIRED)
-	public Account createAnAccount(Account account) {
+	public String createAnAccount(String account) {
 		em.persist(account);
-		return account;
+		return "Account has been created";
 	}
 
 	@Transactional(TxType.REQUIRED)
@@ -50,13 +38,23 @@ public class transactionDBImpl implements ITransaction {
 			em.merge(accountToUpdate);
 		}
 		return "Account has been updated";
-		
+
 	}
 
 	@Transactional(TxType.REQUIRED)
-	public void deleteAccount(Long id) {
+	public String deleteAccount(Long id) {
 		em.remove(em.getReference(Account.class, id));
+		return "account has been deleted";
+	}
 
+	public Account findAnAccount(Long id) {
+		return em.find(Account.class, id);
+	}
 
+	public String getAllAccounts() {
+
+		Query query = em.createQuery("SELECT m FROM ACCOUNT m ORDER BY m.id DESC");
+		Collection<Account> allAccounts = (Collection<Account>) query.getResultList();
+		return util.getJSONForObject(allAccounts);
 	}
 }

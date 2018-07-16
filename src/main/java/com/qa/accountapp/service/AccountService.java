@@ -8,7 +8,7 @@ import com.qa.accountapp.repo.ITransaction;
 
 import database.Account;
 
-public class AccountService implements IaccountService {
+public class AccountService implements IAccountService {
 
 	private static final Logger LOGGER = Logger.getLogger(AccountService.class);
 	

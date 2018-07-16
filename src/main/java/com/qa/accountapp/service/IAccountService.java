@@ -2,7 +2,7 @@ package com.qa.accountapp.service;
 
 import database.Account;
 
-public interface IaccountService {
+public interface IAccountService {
 
 	public String createAnAccount(String account);
 

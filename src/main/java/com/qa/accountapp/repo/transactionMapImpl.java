@@ -2,14 +2,12 @@ package com.qa.accountapp.repo;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import database.Account;
 import utility.JSONutil;
-
 
 @Alternative
 public class transactionMapImpl implements ITransaction {
@@ -23,30 +21,30 @@ public class transactionMapImpl implements ITransaction {
 	public transactionMapImpl() {
 		accounts = new HashMap<>();
 	}
-	
+
 	@Override
-	public Account createAnAccount(Account account) {
+	public String createAnAccount(String account) {
 		id = Collections.max(accounts.keySet());
 		id++;
-		accounts.put(id, account);
+		Account newAccount = util.getObjectForJSON(account, Account.class);
+		accounts.put(id, newAccount);
 		return account;
 	}
 
 	@Override
 	public String updateAnAccount(Long id, String updateInfo) {
-		String message = "";
 		if (accounts.containsKey(id)) {
 			Account updatedAccount = util.getObjectForJSON(updateInfo, Account.class);
 			accounts.put(id, updatedAccount);
-			message = updateInfo;
 		} else
-			message = "account not found";
-		return message;
+			return "Account not found";
+		return updateInfo;
 	}
 
 	@Override
-	public void deleteAccount(Long id) {
+	public String deleteAccount(Long id) {
 		accounts.remove(id);
+		return "Account has been deleted";
 
 	}
 
@@ -56,13 +54,13 @@ public class transactionMapImpl implements ITransaction {
 		if (accounts.containsKey(id)) {
 			foundAcc = accounts.get(id);
 		} else
-			System.out.println("Account not found");
+			System.out.println("Account does not exist");
 		return foundAcc;
 	}
 
 	@Override
-	public List<Account> getAllAccounts() {
-		return (List<Account>) accounts.values();
+	public String getAllAccounts() {
+		return util.getJSONForObject(accounts.values());
 	}
 
 }

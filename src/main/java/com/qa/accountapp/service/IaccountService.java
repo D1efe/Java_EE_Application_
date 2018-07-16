@@ -1,8 +1,8 @@
-package com.qa.accountapp.repo;
+package com.qa.accountapp.service;
 
 import database.Account;
 
-public interface ITransaction {
+public interface IaccountService {
 
 	public String createAnAccount(String account);
 
@@ -13,5 +13,5 @@ public interface ITransaction {
 	public Account findAnAccount(Long id);
 
 	public String getAllAccounts();
-
 }
+	
